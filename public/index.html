@@ -258,17 +258,34 @@
         <!-- VUE APP -->
         <div class="col-md-6" id="app">
           <form @submit.prevent="onSubmit">
+            <template v-if="errors">
+              <div v-for="error in errors" class="alert alert-warning alert-dismissible fade show" role="alert">
+                {{ error.msg }}
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+            </template>
+            <template v-if="response">
+              <div class="alert alert-success alert-dismissible fade show" role="alert">
+                {{ response.message }}
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+            </template>
             <div class="form-group">
               <label for="FormControlInput1">Name</label>
-              <input v-model="name" type="text" class="form-control" id="FormControlInput1" placeholder="Your name here...">
+              <input v-model="name" type="text" :class="faultyName" class="form-control" id="FormControlInput1" placeholder="Your name here...">
             </div>
             <div class="form-group">
               <label for="FormControlInput2">Email address</label>
-              <input v-model="email" type="email" class="form-control" id="FormControlInput2" placeholder="name@company.com">
+              <input v-model="email" type="email" :class="faultyEmail" class="form-control" id="FormControlInput2" placeholder="name@company.com">
             </div>
             <div class="form-group">
               <label for="exampleFormControlTextarea">Description of your project</label>
-              <textarea v-model="description" class="form-control" id="exampleFormControlTextarea" placeholder="Let me grasp your idea..." rows="4"></textarea>
+              <textarea v-model="description" :class="faultyDesc" class="form-control" id="exampleFormControlTextarea" placeholder="Let me grasp your idea..." rows="4"></textarea>
+              <small class="form-text text-muted">{{ msgLen }}/200</small>
             </div>
             <button type="submit" class="btn btn-primary">Submit</button>
           </form>
@@ -290,6 +307,9 @@
       </div>
     </footer>
 
+    <!-- Axios Request Library -->
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+
     <!-- jQuery and Bootstrap Bundle  -->
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
@@ -303,7 +323,30 @@
           return {
             name: '',
             email: '',
-            description: ''
+            description: '',
+            response: '',
+            errors: '',
+            params: []
+          }
+        },
+        computed: {
+          msgLen() {
+            return this.description.length
+          },
+          faultyName() {
+            return {
+              'is-invalid': this.params.includes('name')
+            }
+          },
+          faultyEmail() {
+            return {
+              'is-invalid': this.params.includes('email')
+            }
+          },
+          faultyDesc() {
+            return {
+              'is-invalid': this.params.includes('description')
+            }
           }
         },
         methods: {
@@ -313,7 +356,16 @@
               email: this.email,
               description: this.description
             }
-            console.log(comment);
+            axios.post('/comment', comment)
+              .then(response => {
+                this.response = response.data
+              })
+              .catch(error => {
+                this.errors = error.response.data.errors
+                this.errors.forEach(error => {
+                  this.params.push(error.param)
+                });
+              })
           }
         }
       });
