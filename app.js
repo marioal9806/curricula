@@ -27,6 +27,49 @@ app.post('/comment', [
   res.json({ message: 'Your message has been sent!' })
 })
 
+app.get('/projects', (req, res) => {
+  const projects = [
+    { 
+      name: 'Personal Web Page',
+      category: 'Web Development',
+      description: 'A web page made using the MEVN stack',
+      url_repo: 'https://github.com/marioal9806/curricula'
+    },
+    {
+      name: 'Object Detection',
+      category: 'Machine Learning',
+      description: 'Object detection using YOLO algorithm and Darknet framework',
+      url_repo: 'https://github.com/marioal9806/yolo_obj_detector'
+    },
+    {
+      name: 'easyscript',
+      category: 'Computer Science',
+      description: 'A programming language made using Python',
+      url_repo: 'https://github.com/marioal9806/easyscript'
+    },
+    {
+      name: 'EasyScript',
+      category: 'Computer Science',
+      description: 'A programming language made using Python',
+      url_repo: 'https://github.com/marioal9806/easyscript'
+    },
+    {
+      name: 'EasyScriptttt',
+      category: 'Computer Science',
+      description: 'A programming language made using Python',
+      url_repo: 'https://github.com/marioal9806/easyscript'
+    },
+    {
+      name: 'EasyyyyScriptttt',
+      category: 'Computer Science',
+      description: 'A programming language made using Python',
+      url_repo: 'https://github.com/marioal9806/easyscript'
+    },
+  ]
+  
+  res.json(projects)
+})
+
 app.listen(PORT, () => {
   console.log(`Server listening on port ${PORT}...`)
 })
