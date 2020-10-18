@@ -1,0 +1,27 @@
+{
+  "name": "curricula",
+  "version": "1.0.0",
+  "description": "Personal Page to showcase my Professional Work",
+  "main": "index.js",
+  "scripts": {
+    "start": "node app.js",
+    "dev": "nodemon app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/marioal9806/curricula.git"
+  },
+  "author": "Mario Ortega",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/marioal9806/curricula/issues"
+  },
+  "homepage": "https://github.com/marioal9806/curricula#readme",
+  "dependencies": {
+    "express": "^4.17.1",
+    "express-validator": "^6.6.1"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.5"
+  }
+}
