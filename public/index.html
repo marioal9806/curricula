@@ -316,59 +316,6 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
   
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
-    <script>
-      const app = new Vue({
-        el: '#app',
-        data() {
-          return {
-            name: '',
-            email: '',
-            description: '',
-            response: '',
-            errors: '',
-            params: []
-          }
-        },
-        computed: {
-          msgLen() {
-            return this.description.length
-          },
-          faultyName() {
-            return {
-              'is-invalid': this.params.includes('name')
-            }
-          },
-          faultyEmail() {
-            return {
-              'is-invalid': this.params.includes('email')
-            }
-          },
-          faultyDesc() {
-            return {
-              'is-invalid': this.params.includes('description')
-            }
-          }
-        },
-        methods: {
-          onSubmit() {
-            let comment = {
-              name: this.name,
-              email: this.email,
-              description: this.description
-            }
-            axios.post('/comment', comment)
-              .then(response => {
-                this.response = response.data
-              })
-              .catch(error => {
-                this.errors = error.response.data.errors
-                this.errors.forEach(error => {
-                  this.params.push(error.param)
-                });
-              })
-          }
-        }
-      });
-    </script>
+    <script src="javascript/vue-app.js"></script>
   </body>
 </html>
