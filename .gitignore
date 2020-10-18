@@ -25,3 +25,6 @@ $RECYCLE.BIN/
 
 # VScode config files
 .vscode/
+
+# Node modules
+node_modules/
