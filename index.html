@@ -263,15 +263,15 @@
           <form @submit.prevent="onSubmit">
             <div class="form-group">
               <label for="FormControlInput1">Name</label>
-              <input v-model="name" type="text" class="form-control" id="FormControlInput1">
+              <input v-model="name" type="text" class="form-control" id="FormControlInput1" placeholder="Your name here...">
             </div>
             <div class="form-group">
               <label for="FormControlInput2">Email address</label>
-              <input v-model="email" type="email" class="form-control" id="FormControlInput2">
+              <input v-model="email" type="email" class="form-control" id="FormControlInput2" placeholder="name@company.com">
             </div>
             <div class="form-group">
               <label for="exampleFormControlTextarea">Description of your project</label>
-              <textarea v-model="description" class="form-control" id="exampleFormControlTextarea" rows="4"></textarea>
+              <textarea v-model="description" class="form-control" id="exampleFormControlTextarea" placeholder="Let me grasp your idea..." rows="4"></textarea>
             </div>
             <button type="submit" class="btn btn-primary">Submit</button>
           </form>
