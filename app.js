@@ -21,10 +21,12 @@ const Comment = require('./models/Comment')
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
 
+// Static files serving
 app.use(express.static('public'))
 
 // Handle POST request of Comments Form 
 app.post('/comment', [
+  // Form validation
   body('name', 'Please submit a name').not().isEmpty().matches(/^[a-z ,.'-]+$/i).trim(' ').withMessage('Please, restrict use of numeric or special characters'),
   body('email', 'The email is not valid').isEmail().normalizeEmail(),
   body('description', 'The description cannot be empty').not().isEmpty().isLength({max: 200}).escape().withMessage('Please, restrict the description under 200 characters')
@@ -40,6 +42,7 @@ app.post('/comment', [
     description: req.body.description
   })
 
+  // Save comment into the database
   newComment.save()
     .then(comment => {
       res.status(200)
