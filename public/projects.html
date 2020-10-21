@@ -30,9 +30,9 @@
 
   <!-- Main Section -->
   <div class="container">
-    <h1 class="display-1 my-5">My Projects</h1>
-    <p class="lead">This is a list of all my personal projects! You can access the individual GitHub repository to learn more about it.</p>
-    <div class="row" id="app">
+    <h1 class="display-1 my-5 text-center">My Projects</h1>
+    <p class="lead text-center">This is a list of all my personal projects! You can access the individual GitHub repository to learn more about it.</p>
+    <div class="row justify-content-center" id="app">
       <project-card v-for="project in projects" :project="project" :key="project.name"></project-card>
     </div>
   </div>
@@ -66,7 +66,7 @@
 
   <!-- Vue Project Card Template -->
   <script type="text/x-template" id="project-card-template">
-    <div class="col-4 mx-auto my-4">
+    <div class="col-md-4 my-4">
       <div :class="project.color" class="card text-white mb-3" style="max-width: 18rem;">
         <div class="card-header">{{ project.category }}</div>
         <div class="card-body">
